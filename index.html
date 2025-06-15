@@ -1,0 +1,153 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcya6GOAHmAQOSAXCYGBKgv2qBt2oIABgIfmBoyoOHOgc3IDsApIHFlQM-BARgAs_QAJGgAHTAb6aAX1MCf2oBXrSgBoi6XADMKsSgGMc0MDgBOlIgF9N6MMGBZIIAqmIZzEAObeLVAENSCABnDS1YINCABWAIU39CD3sATxB8AxCACwCAE2AAdysPWwidYHMAWwCwM3MCHQBXaENIGAAKEADzAMqQgEok5PMcMEbzOAADABIkLp6-gG0ABgBdADpoXpxrAB4AI3MAegA-COTkwEBjQFu_RQJZ-d6QlY2ANwCsRp3AFz0D47OLoDYHx-IAGJQk_Huc26Txe61yNQC6xCYG6YAAmjhutYALQPGFLNbwxHrEy5THYyYAbgi1hsdlguD80FybgiCNRBEWlBuina336lFWDPsoAIAGZlvSiN4vKyhtocHoqOL-OEPF5vFl9JRJOriPtgLVgJUVWqRbBDDBUfEADIBfY4LAEMDmL7S9CkACCwRCbI8YDSGUo70-OH16CORy2lWDvIU_MFFqiIXtjudCuI5SqNTqVCQoa-1mKxDp6FK6BSPtC_uIgfSVEMNRw3gqKQjsA5AS5lEAl-n0DQGQC0cgP1AZAKemgBpzQeUQDt-qODIA4_wXlEAei6AD0UZ4BVmwHwoiKbTTtrHnidVDBGWFvQ5iNzYvtI9sBCFggOD9sEWEXcyRjcduCYFDtUgbAx9m6IDO0RLlzmIb8gULDJRAADivZIUTRCl6lgAAmZY8NQjwyUwghcOQgjiAgMxKgAZUDXA3EtJwKioABiABWcReGWABhAA2ShYDLQEK0BODAQQkjxXI9B0PMDEsSw3D8JgwiWWInDlmwqSVIoqjaJSejkEYrBmIMFiAE5RG47jeDYgShIuESLjEi4JJw8RpKfVE5PU0RzK4zyiIUgg_PMjydPQSicBouiMiQYzTMoFiAFFkt49L-MEnSnOSFzkjc8RLwiryMOC2A_PFbDArUsq_N4KriqimKDLihKsKSgAxL1uKQtikPs7LyLyjw3PqzzZPk7oQrChqgXQIKpo0iRPKa_TDPiq0TPaljeHFbjlgAEWSgagRyjxhuINzevG7zJqw5CkN4aryVq_zZrm1bYoYzbEpY8UACEvWw-qTuEobirc0RsN4m7SsW5DeLY57fPMyyVr0r6jJ-7aOp68Q2Ow0HHJgvcLiwB0j0zDxskKF03RwciQGAEJKKgaAqE1bUIPQbNqlqRImhaNpoE6AkBip4ZRnGKZ8QWEJiVRdYEOsb5YHaWWngVpEJsw3ENb6LXSRq7F-mpbKYIcrL0FWFBrCpIA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '部分国家老龄化率从7%升至14%所需时间对比',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    },
+    formatter: function(params) {
+      return `${params[0].name}<br/>
+              持续时间: ${params[0].value}年<br/>
+              从7%到14%: ${params[0].data.startYear}-${params[0].data.endYear}`;
+    }
+  },
+  legend: {
+    data: ['持续时间(年)'],
+    top: 30
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value',
+    //name: '持续时间(年)',
+    axisLabel: {
+      formatter: '{value}'
+    }
+  },
+  yAxis: {
+    type: 'category',
+    data: ['韩国', '中国', '日本', '德国', '美国', '瑞典', '法国'],
+    axisLabel: {
+      interval: 0,
+      rotate: 0
+    }
+  },
+  series: [
+    {
+      name: '持续时间(年)',
+      type: 'bar',
+      data: [
+        {
+          value: 18,
+          startYear: 2000,
+          endYear: 2018,
+          itemStyle: { color: '#5470C6' }
+        },
+        {
+          value: 23,
+          startYear: 2000,
+          endYear: 2023,
+          itemStyle: { color: '#91CC75' }
+        },
+        {
+          value: 24,
+          startYear: 1970,
+          endYear: 1994,
+          itemStyle: { color: '#EE6666' }
+        },
+        {
+          value: 40,
+          startYear: 1932,
+          endYear: 1972,
+          itemStyle: { color: '#FAC858' }
+        },
+        {
+          value: 72,
+          startYear: 1942,
+          endYear: 2014,
+          itemStyle: { color: '#73C0DE' }
+        },
+        {
+          value: 85,
+          startYear: 1887,
+          endYear: 1972,
+          itemStyle: { color: '#3BA272' }
+        },
+        {
+          value: 126,
+          startYear: 1865,
+          endYear: 1991,
+          itemStyle: { color: '#FC8452' }
+        }
+      ],
+      label: {
+        show: true,
+        position: 'right',
+        formatter: function(params) {
+          return `${params.data.value}年 (${params.data.startYear}-${params.data.endYear})`;
+        }
+      }
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
